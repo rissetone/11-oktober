@@ -7,7 +7,6 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Source+Sans+Pro:wght@300;400&display=swap');
 
-        /* Perbaikan: Menghapus overflow: hidden agar halaman bisa di-scroll natural */
         body {
             margin: 0;
             padding: 0;
@@ -15,11 +14,10 @@
             color: #f0f0f0;
             font-family: 'Source Sans Pro', sans-serif;
             min-height: 100vh; 
-            overflow-x: hidden; /* Hanya cegah scroll samping */
+            overflow-x: hidden; 
             position: relative;
         }
 
-        /* Kunang-kunang diatur fixed agar selalu mengikuti walau layar di-scroll */
         .fireflies-container {
             position: fixed;
             top: 0;
@@ -47,7 +45,6 @@
             100% { transform: translate(calc(var(--tx) * 1.5), calc(var(--ty) * 1.5)) scale(0.8); opacity: 0; }
         }
 
-        /* Perbaikan: Container dibuat fluid, tidak dikunci height-nya */
         .container {
             width: 100%;
             max-width: 480px;
@@ -66,7 +63,7 @@
         
         h1 { font-size: 1.8rem; margin-bottom: 15px; }
         
-        /* Format Sajak (Teks rata tengah, line-height lega) */
+        /* Format Sajak: Teks rata tengah, line-height lega */
         p {
             font-size: 1.1rem;
             line-height: 1.9;
@@ -76,25 +73,22 @@
             text-align: center;
         }
 
-        /* Perbaikan Sistem Slide: Menggunakan flexbox alih-alih absolute positioning */
         .slide {
-            display: none; /* Disembunyikan secara default */
+            display: none; 
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start; /* PERBAIKAN: Agar tidak terpotong di atas saat konten panjang */
             align-items: center;
-            min-height: 100vh; /* Minimal setinggi layar, tapi bisa memanjang jika teks banyak */
-            padding: 50px 25px; /* Ruang lega di atas dan bawah */
+            min-height: 100vh; 
+            padding: 12vh 25px 15vh 25px; /* Ruang napas sangat lega di atas dan bawah layar */
             box-sizing: border-box;
             opacity: 0;
             transition: opacity 1.5s ease-in-out;
         }
 
-        /* Slide yang aktif akan ditampilkan sebagai flexbox */
         .slide.active {
             display: flex;
         }
         
-        /* Efek Fade In */
         .slide.show {
             opacity: 1;
         }
@@ -103,7 +97,6 @@
             display: flex;
             justify-content: center;
             margin-bottom: 40px;
-            margin-top: 20px;
         }
         .candle {
             width: 40px;
@@ -176,8 +169,9 @@
             transition: all 0.4s ease;
             letter-spacing: 1px;
             margin-top: 20px;
-            margin-bottom: 20px; /* Ruang tambahan di bawah tombol agar tidak mentok ujung layar */
+            margin-bottom: 20px; 
             outline: none;
+            flex-shrink: 0;
         }
         .btn:hover, .btn:active {
             background-color: #d4af37;
@@ -197,7 +191,7 @@
     <div id="fireflies" class="fireflies-container"></div>
 
     <div class="container">
-        <!-- Native Audio Player (Tersembunyi) -->
+        <!-- Native Audio Player -->
         <audio id="bg-music" loop>
             <source src="videoplayback.m4a" type="audio/mp4">
         </audio>
@@ -215,47 +209,39 @@
             <button class="btn" onclick="startJourney()">Mulai Perjalanan</button>
         </div>
 
-        <!-- SLIDE 2: Fase Kecil & Remaja Awal -->
+        <!-- SLIDE 2: Fase Kecil & Remaja (Merangkum Perjalanan dan 2015) -->
         <div id="slide2" class="slide">
             <div class="photo-frame">
                 <img src="foto-remaja.jpg" alt="Okta Masa Lalu" onerror="this.src='https://placehold.co/220x220/222/d4af37?text=Masa+Lalu'">
             </div>
-            <p>Waktu berlari membawa lakon yang tak selalu ramah.<br>Sejak jemari kecil itu baru belajar menggenggam dunia,<br>badai telah lebih dulu datang menguji tanpa aba-aba.<br><br>Hingga semesta menautkan kita di persimpangan dua ribu lima belas—<br>kala matamu masih menyimpan binar yang lugu,<br>sebelum hari esok memaksamu tumbuh menjadi perempuan setegar karang.</p>
+            <p>Waktu berlari membawa lakon yang tak selalu ramah.<br>Sejak jemari kecil itu baru belajar menggenggam dunia,<br>badai telah lebih dulu datang menguji tanpa aba-aba.<br><br>Hingga semesta menautkan kita di satu masa...<br><span class="highlight">ku mengenalmu pada dua ribu lima belas, tanpa tau apa saja yang kau lewati.</span><br><br>Tahun-tahun setelahnya adalah rapal panjang tentang caramu bertahan. Menelan pahit dalam senyap, mengeja sunyi, dan merawat sisa asa di atas kepingan luka yang tak dilihat siapa-siapa.</p>
             <button class="btn" onclick="nextSlide(2, 3)">Lanjut</button>
         </div>
 
-        <!-- SLIDE 3: Fase Peralihan (Struggle) -->
+        <!-- SLIDE 3: Fase Dewasa (Independen & 2026) -->
         <div id="slide3" class="slide">
-            <div class="photo-frame">
-                <img src="foto-peralihan.jpg" alt="Okta Peralihan" onerror="this.src='https://placehold.co/220x220/222/d4af37?text=Perjalanan'">
-            </div>
-            <p>Tahun-tahun setelahnya adalah rapal panjang tentang cara bertahan.<br>Lorong waktu memaksamu menelan pahit dan letih dalam senyap,<br>merajut kembali sisa asa di atas kepingan luka yang tak dilihat siapa-siapa.<br><br>Kau belajar berdiri kokoh di tepian curam,<br>mengeja sunyi di tengah gemuruh tuntutan hidup,<br>dan merawat nyala percaya di saat semesta seolah enggan memihak.</p>
-            <button class="btn" onclick="nextSlide(3, 4)">Lanjut</button>
-        </div>
-
-        <!-- SLIDE 4: Fase Dewasa (Independen & 2026) -->
-        <div id="slide4" class="slide">
             <div class="photo-frame">
                 <img src="foto-dewasa.jpg" alt="Okta Dewasa" onerror="this.src='https://placehold.co/220x220/222/d4af37?text=Okta+Hari+Ini'">
             </div>
             <h1>Oktober 2026.</h1>
             <p>Kini, di usiamu yang menginjak dua puluh lapan,<br>kau menjelma perempuan yang berdiri anggun di atas kakimu sendiri.<br>Menolak tunduk pada badai,<br>merajut mimpimu dengan peluh di tanah perantauan.<br><br>Melihat caramu menata takdir hari ini...<br>ada rasa bangga yang bergemuruh teramat dalam,<br>menyaksikan sosok hebat yang kini bernapas di hadapanku.</p>
-            <button class="btn" onclick="nextSlide(4, 5)">Halaman Terakhir</button>
+            <button class="btn" onclick="nextSlide(3, 4)">Halaman Terakhir</button>
         </div>
 
-        <!-- SLIDE 5: Epilog (Secure Alpha - Respectful & Accountable) -->
-        <div id="slide5" class="slide">
+        <!-- SLIDE 4: Epilog (Secure Alpha - Respectful & Accountable) -->
+        <div id="slide4" class="slide">
             <p>Dalam bentang kelana yang panjang,<br>gesekan dan luput adalah niscaya.<br>Termasuk caraku bertutur yang sempat menorehkan resah di benakmu.<br><br>Aku merangkul salah itu tanpa dalih,<br>menjadikannya cermin untuk merawat apa yang kita punya,<br>agar senantiasa berpijak pada teduh dan saling percaya.</p>
             <p>Aku amat menghormati ruang dan prinsip yang kau bangun dengan susah payah.<br>Bukan hadir untuk membebani,<br>melainkan ingin berjalan di sisimu sebagai kawan yang setia dan menenangkan.</p>
             <h1>Selamat bertambah usia, Okta.<br>Tetaplah bercahaya, dan berbahagialah di sana.</h1>
             <p style="font-size: 0.9rem; margin-top: 30px; color: #777;">— Riswan —</p>
             
-            <button class="btn" style="margin-top: 20px; font-size: 0.9rem; padding: 8px 20px;" onclick="resetJourney()">Kembali ke Awal</button>
+            <button class="btn" style="margin-top: 30px; font-size: 0.9rem; padding: 8px 20px;" onclick="resetJourney()">Kembali ke Awal</button>
         </div>
 
     </div>
 
     <script>
+        // Animasi Kunang-kunang
         function createFireflies() {
             const container = document.getElementById('fireflies');
             const numFireflies = 30; 
@@ -278,6 +264,7 @@
         
         createFireflies();
 
+        // Pemutar Musik
         function startJourney() {
             const music = document.getElementById('bg-music');
             music.volume = 0.3; 
@@ -286,34 +273,30 @@
             nextSlide(1, 2);
         }
 
-        // Logika perpindahan slide yang sangat smooth dan mendukung natural scroll
+        // Logika Perpindahan Slide (Natural Scroll support)
         function nextSlide(current, next) {
             const currentSlide = document.getElementById('slide' + current);
             const nextSlideEl = document.getElementById('slide' + next);
 
-            // 1. Pudarkan slide saat ini
             currentSlide.style.opacity = 0;
             
             setTimeout(() => {
-                // 2. Hilangkan dari layout
                 currentSlide.classList.remove('active', 'show');
-                
-                // 3. Masukkan slide baru ke layout
                 nextSlideEl.classList.add('active');
                 
-                // 4. Gulir layar ke atas secara halus
+                // Mulus menggulir layar kembali ke atas
                 window.scrollTo({ top: 0, behavior: 'smooth' });
 
-                // 5. Munculkan slide baru secara perlahan
                 setTimeout(() => {
                     nextSlideEl.classList.add('show');
                 }, 50);
 
-            }, 1000); // Durasi menunggu transisi CSS (1 detik)
+            }, 1000);
         }
 
+        // PERBAIKAN: Fungsi Reset Button agar kembali menargetkan Slide 4 ke Slide 1
         function resetJourney() {
-            const currentSlide = document.getElementById('slide5');
+            const currentSlide = document.getElementById('slide4');
             const nextSlideEl = document.getElementById('slide1');
 
             currentSlide.style.opacity = 0;

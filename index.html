@@ -135,28 +135,26 @@
             80% { transform: translateX(-49%) scale(0.98); opacity: 0.9; }
             100% { transform: translateX(-50%) scale(1); opacity: 1; }
         }
-
+/* PERUBAHAN CSS: Efek Kertas Polaroid Authentic */
         .photo-frame {
             width: 220px;
-            height: 220px;
-            margin: 0 auto 30px;
-            border-radius: 10px;
-            border: 2px solid #333;
-            padding: 5px;
-            background-color: #1a1a1a;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            overflow: hidden;
+            margin: 0 auto 30px auto;
+            background-color: #f8f8f8; /* Warna kertas polaroid (putih tulang) */
+            padding: 12px 12px 50px 12px; /* Padding polaroid: atas, kanan, kiri sama, bawah jauh lebih tebal */
+            border-radius: 2px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 5px 15px rgba(0, 0, 0, 0.5); /* Efek drop-shadow 3D elegan */
             position: relative;
             flex-shrink: 0;
         }
+        
         .photo-frame img {
             width: 100%;
-            height: 100%;
+            height: 220px; /* Dikunci agar rasionya bujur sangkar (persegi) khas polaroid */
             object-fit: cover;
-            border-radius: 5px;
+            border-radius: 2px;
             filter: grayscale(20%) contrast(110%);
+            display: block;
         }
-
         .btn {
             background-color: transparent;
             border: 1px solid #d4af37;
@@ -248,9 +246,9 @@
 
             <p>Jangan ragu untuk terus melangkah maju, karena aku akan selalu siap mendukung dan menjagamu dari dekat. Di saat dunia terlalu bising dan kau lelah menjadi baja, kau selalu punya tempat untuk menepi. Aku akan meminjamkan bahu sebagai sandaran paling aman untukmu melepas lelah.</p>
 
-            <p>Di akhir pesan ini, izinkan aku menyampaikan maaf yang tulus atas gesekan dan kelalaian caraku berkomunikasi tempo hari. Kekeliruan itu menjadi pengingat bagiku untuk terus belajar menjadi pendamping yang lebih baik untukmu.</p>
-            
             <h1>Selamat bertambah usia, Okta.<br>Tetaplah tangguh dan bercahaya</h1>
+            
+            <p>Di akhir pesan ini, izinkan aku menyampaikan maaf yang tulus atas gesekan dan kelalaian caraku berkomunikasi tempo hari. Kekeliruan itu menjadi pengingat bagiku untuk terus belajar menjadi pendamping yang lebih baik untukmu.</p>
 
             <p style="font-size: 0.9rem; margin-top: 30px; color: #777;">— Riswan —</p>
             

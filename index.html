@@ -63,7 +63,6 @@
         
         h1 { font-size: 1.8rem; margin-bottom: 15px; }
         
-        /* Format Sajak: Teks rata tengah, line-height lega */
         p {
             font-size: 1.1rem;
             line-height: 1.9;
@@ -76,10 +75,10 @@
         .slide {
             display: none; 
             flex-direction: column;
-            justify-content: flex-start; /* PERBAIKAN: Agar tidak terpotong di atas saat konten panjang */
+            justify-content: flex-start; /* Mengakomodasi layar HP agar tombol tidak terpotong */
             align-items: center;
             min-height: 100vh; 
-            padding: 12vh 25px 15vh 25px; /* Ruang napas sangat lega di atas dan bawah layar */
+            padding: 12vh 25px 15vh 25px; /* Memberikan ruang napas di atas dan bawah untuk scroll */
             box-sizing: border-box;
             opacity: 0;
             transition: opacity 1.5s ease-in-out;
@@ -148,6 +147,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             overflow: hidden;
             position: relative;
+            flex-shrink: 0;
         }
         .photo-frame img {
             width: 100%;
@@ -187,16 +187,15 @@
 </head>
 <body>
 
-    <!-- Wadah Kunang-Kunang -->
     <div id="fireflies" class="fireflies-container"></div>
 
     <div class="container">
-        <!-- Native Audio Player -->
+        <!-- Audio -->
         <audio id="bg-music" loop>
             <source src="videoplayback.m4a" type="audio/mp4">
         </audio>
         
-        <!-- SLIDE 1: Pembuka (Lilin) -->
+        <!-- SLIDE 1: Pembuka -->
         <div id="slide1" class="slide active show">
             <div class="candle-container">
                 <div class="candle">
@@ -205,34 +204,50 @@
                 </div>
             </div>
             <h1>Untuk Okta.</h1>
-            <p>Di bawah gigil angin musim gugur Hokkaido yang memeluk sunyi,<br>biarkan ruang ini menjelma dermaga kecil tempatmu menaruh lelah.<br><br>Lilin ini menyala dalam diam—<br>menemani malam kelahiranmu tanpa pinta,<br>hanya merayakan napas, dan sebentuk keteguhan yang kau rawat sedemikian rupa.</p>
+            <p>Di bawah gigil angin musim gugur Hokkaido yang memeluk sunyi,<br>biarkan ruang ini menjelma dermaga kecil tempatmu menaruh lelah.<br><br>Malam ini kita tak merayakan apa pun,<br>selain usiamu, napasmu, dan segenap keteguhan yang senantiasa kau rawat dalam diam.</p>
             <button class="btn" onclick="startJourney()">Mulai Perjalanan</button>
         </div>
 
-        <!-- SLIDE 2: Fase Kecil & Remaja (Merangkum Perjalanan dan 2015) -->
+        <!-- SLIDE 2: Fase Kecil (Kebangkrutan Tersirat) -->
         <div id="slide2" class="slide">
             <div class="photo-frame">
-                <img src="foto-remaja.jpg" alt="Okta Masa Lalu" onerror="this.src='https://placehold.co/220x220/222/d4af37?text=Masa+Lalu'">
+                <img src="foto-kecil.jpg" alt="Okta Masa Kecil" onerror="this.src='https://placehold.co/220x220/222/d4af37?text=Masa+Kecil'">
             </div>
-            <p>Waktu berlari membawa lakon yang tak selalu ramah.<br>Sejak jemari kecil itu baru belajar menggenggam dunia,<br>badai telah lebih dulu datang menguji tanpa aba-aba.<br><br>Hingga semesta menautkan kita di satu masa...<br><span class="highlight">ku mengenalmu pada dua ribu lima belas, tanpa tau apa saja yang kau lewati.</span><br><br>Tahun-tahun setelahnya adalah rapal panjang tentang caramu bertahan. Menelan pahit dalam senyap, mengeja sunyi, dan merawat sisa asa di atas kepingan luka yang tak dilihat siapa-siapa.</p>
+            <p>Gadis kecil di bingkai ini mungkin tak banyak merekam riuhnya masa jaya yang pernah ada.<br><br>Di usia lima atau enam, ketika garis takdir keluargamu tiba-tiba membelok tajam, kau dipaksa menelan kenyataan yang berubah warna.<br><br>Sebuah masa peralihan di mana benih ketabahan mulai diam-diam berakar di jiwamu, merawatmu untuk menghadapi badai-badai panjang di depan sana.</p>
             <button class="btn" onclick="nextSlide(2, 3)">Lanjut</button>
         </div>
 
-        <!-- SLIDE 3: Fase Dewasa (Independen & 2026) -->
+        <!-- SLIDE 3: Fase Remaja (2015) -->
         <div id="slide3" class="slide">
+            <div class="photo-frame">
+                <img src="foto-remaja.jpg" alt="Okta Remaja" onerror="this.src='https://placehold.co/220x220/222/d4af37?text=Masa+Remaja'">
+            </div>
+            <p>Lalu waktu membawamu pada lekuk-lekuk masa remaja.<br><br>Semesta menautkan jejak kita di persimpangan dua ribu lima belas. Sebuah perjumpaan di mana aku hanya tertegun pada binar matamu...<br><span class="highlight">tanpa pernah benar-benar mengerti seberapa terjal jalan yang diam-diam sedang kau tempuh sendirian.</span></p>
+            <button class="btn" onclick="nextSlide(3, 4)">Lanjut</button>
+        </div>
+
+        <!-- SLIDE 4: Fase Peralihan (18-25 Tahun) -->
+        <div id="slide4" class="slide">
+            <div class="photo-frame">
+                <img src="foto-peralihan.jpg" alt="Okta Dewasa Awal" onerror="this.src='https://placehold.co/220x220/222/d4af37?text=Peralihan'">
+            </div>
+            <p>Memasuki belasan hingga pertengahan dua puluhan, gelombang hidup menghantammu lebih keras.<br>Kau bertarung memikul beban karir, keluarga, hingga merawat kepingan hati yang patah.<br><br>Ironisnya, di masa itu, aku membiarkan kebodohan ego merajai diri—memilih menjauh dan menutup semua pintu.<br>Aku hanya bisa menjelma saksi bisu, menatap kerasnya perjuanganmu dari balik layar-layar fana.</p>
+            <button class="btn" onclick="nextSlide(4, 5)">Lanjut</button>
+        </div>
+
+        <!-- SLIDE 5: Fase Dewasa (2026) & Epilog Secure Alpha -->
+        <div id="slide5" class="slide">
             <div class="photo-frame">
                 <img src="foto-dewasa.jpg" alt="Okta Dewasa" onerror="this.src='https://placehold.co/220x220/222/d4af37?text=Okta+Hari+Ini'">
             </div>
             <h1>Oktober 2026.</h1>
-            <p>Kini, di usiamu yang menginjak dua puluh lapan,<br>kau menjelma perempuan yang berdiri anggun di atas kakimu sendiri.<br>Menolak tunduk pada badai,<br>merajut mimpimu dengan peluh di tanah perantauan.<br><br>Melihat caramu menata takdir hari ini...<br>ada rasa bangga yang bergemuruh teramat dalam,<br>menyaksikan sosok hebat yang kini bernapas di hadapanku.</p>
-            <button class="btn" onclick="nextSlide(3, 4)">Halaman Terakhir</button>
-        </div>
-
-        <!-- SLIDE 4: Epilog (Secure Alpha - Respectful & Accountable) -->
-        <div id="slide4" class="slide">
-            <p>Dalam bentang kelana yang panjang,<br>gesekan dan luput adalah niscaya.<br>Termasuk caraku bertutur yang sempat menorehkan resah di benakmu.<br><br>Aku merangkul salah itu tanpa dalih,<br>menjadikannya cermin untuk merawat apa yang kita punya,<br>agar senantiasa berpijak pada teduh dan saling percaya.</p>
-            <p>Aku amat menghormati ruang dan prinsip yang kau bangun dengan susah payah.<br>Bukan hadir untuk membebani,<br>melainkan ingin berjalan di sisimu sebagai kawan yang setia dan menenangkan.</p>
-            <h1>Selamat bertambah usia, Okta.<br>Tetaplah bercahaya, dan berbahagialah di sana.</h1>
+            <p>Di usiamu yang menginjak dua puluh delapan, kau telah menjelma perempuan yang tahu persis ke mana harus melangkah. Memilih berdiri mandiri, merajut mimpi di tanah perantauan, dan menolak merendahkan nilaimu demi sebuah sandaran.</p>
+            
+            <p>Di hari istimewamu ini, aku meminta maaf secara tulus atas kelalaian masa lalu yang sempat menorehkan jarak. Aku telah merangkul salah itu sebagai cermin pendewasaan.</p>
+            
+            <p>Kini, aku amat menghargai benteng kemandirian yang kau bangun dengan peluh.<br>Aku hadir bukan untuk mengikis kemerdekaanmu, melainkan sekadar ingin membersamai langkahmu sebagai kawan setara yang selalu mendukungmu dari dekat.</p>
+            
+            <h1>Selamat merayakan usia, Okta.<br>Teruslah bercahaya.</h1>
             <p style="font-size: 0.9rem; margin-top: 30px; color: #777;">— Riswan —</p>
             
             <button class="btn" style="margin-top: 30px; font-size: 0.9rem; padding: 8px 20px;" onclick="resetJourney()">Kembali ke Awal</button>
@@ -284,19 +299,19 @@
                 currentSlide.classList.remove('active', 'show');
                 nextSlideEl.classList.add('active');
                 
-                // Mulus menggulir layar kembali ke atas
+                // Mulus menggulir layar kembali ke atas untuk slide baru
                 window.scrollTo({ top: 0, behavior: 'smooth' });
 
                 setTimeout(() => {
                     nextSlideEl.classList.add('show');
                 }, 50);
 
-            }, 1000);
+            }, 1000); // Sinkron dengan durasi transisi CSS
         }
 
-        // PERBAIKAN: Fungsi Reset Button agar kembali menargetkan Slide 4 ke Slide 1
+        // PERBAIKAN FATAL: Memastikan target kembalinya berputar dari Slide 5 ke Slide 1
         function resetJourney() {
-            const currentSlide = document.getElementById('slide4');
+            const currentSlide = document.getElementById('slide5');
             const nextSlideEl = document.getElementById('slide1');
 
             currentSlide.style.opacity = 0;

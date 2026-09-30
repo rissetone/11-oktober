@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Untuk Okta 🤎</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Source+Sans+Pro:wght@300;400&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0a0a0a;
+            color: #f0f0f0;
+            font-family: 'Source Sans Pro', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .fireflies-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .firefly {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background-color: #d4af37;
+            border-radius: 50%;
+            box-shadow: 0 0 6px 2px rgba(212, 175, 55, 0.6);
+            opacity: 0;
+            animation: floatAndBlink infinite ease-in-out;
+        }
+        @keyframes floatAndBlink {
+            0% { transform: translate(0, 0) scale(1); opacity: 0; }
+            20% { opacity: 0.8; }
+            50% { transform: translate(var(--tx), var(--ty)) scale(1.2); opacity: 0.2; }
+            80% { opacity: 0.9; }
+            100% { transform: translate(calc(var(--tx) * 1.5), calc(var(--ty) * 1.5)) scale(0.8); opacity: 0; }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            letter-spacing: 1px;
+            color: #d4af37;
+        }
+        
+        h1 { font-size: 1.8rem; margin-bottom: 15px; }
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #cccccc;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        .slide {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 85%;
+            max-height: 90vh;
+            overflow-y: auto;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1.5s ease-in-out, visibility 1.5s;
+        }
+        
+        .slide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .candle-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            margin-top: 60px;
+        }
+        .candle {
+            width: 40px;
+            height: 120px;
+            background: linear-gradient(to bottom, #e6e4d5, #b8b6a5);
+            border-radius: 3px;
+            position: relative;
+            box-shadow: inset -5px 0 10px rgba(0,0,0,0.1);
+        }
+        .wick {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 12px;
+            background: #333;
+            border-radius: 50%;
+        }
+        .flame {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 35px;
+            background: #ff9d00;
+            border-radius: 50% 50% 20% 20%;
+            box-shadow: 0 0 20px #ff9d00, 0 0 40px #ff9d00, 0 0 60px #ff6a00;
+            animation: flicker 2s infinite alternate;
+        }
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1); opacity: 0.9; }
+            20% { transform: translateX(-48%) scale(1.05); opacity: 1; }
+            40% { transform: translateX(-52%) scale(0.95); opacity: 0.8; }
+            60% { transform: translateX(-50%) scale(1.02); opacity: 1; }
+            80% { transform: translateX(-49%) scale(0.98); opacity: 0.9; }
+            100% { transform: translateX(-50%) scale(1); opacity: 1; }
+        }
+
+        .photo-frame {
+            width: 220px;
+            height: 220px;
+            margin: 0 auto 25px;
+            border-radius: 10px;
+            border: 2px solid #333;
+            padding: 5px;
+            background-color: #1a1a1a;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            overflow: hidden;
+            position: relative;
+        }
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+            filter: grayscale(20%) contrast(110%);
+        }
+
+        .btn {
+            background-color: transparent;
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-family: 'Source Sans Pro', sans-serif;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            letter-spacing: 1px;
+            margin-top: 10px;
+            outline: none;
+        }
+        .btn:hover, .btn:active {
+            background-color: #d4af37;
+            color: #0a0a0a;
+        }
+
+        .highlight {
+            color: #d4af37;
+            font-weight: 400;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Native Audio Player (Tersembunyi) -->
+        <audio id="bg-music" loop>
+            <source src="videoplayback.m4a" type="audio/mp4">
+        </audio>
+        
+        <!-- SLIDE 1: Pembuka (Lilin) -->
+        <div id="slide1" class="slide active">
+            <div class="candle-container">
+                <div class="candle">
+                    <div class="wick"></div>
+                    <div class="flame"></div>
+                </div>
+            </div>
+            <h1>Untuk Okta.</h1>
+            <p>Di bawah dinginnya angin musim gugur Hokkaido yang memeluk sunyi, biarkan sejenak ruang ini menjadi dermaga kecil untuk menaruh lelah.<br><br>Nyala lilin ini menyala dalam diam—menemani malam ulang tahunmu tanpa menuntut apa pun, selain merayakan napas dan keteguhan yang kau miliki.</p>
+            <button class="btn" onclick="startJourney()">Mulai Perjalanan</button>
+        </div>
+
+        <!-- SLIDE 2: Fase Kecil & Remaja Awal -->
+        <div id="slide2" class="slide">
+            <div class="photo-frame">
+                <img src="foto-remaja.jpg" alt="Okta Masa Lalu" onerror="this.src='https://placehold.co/220x220/222/d4af37?text=Masa+Lalu'">
+            </div>
+            <p>Waktu berlari membawa cerita yang tak selalu ramah. Sejak jemari kecil itu mulai belajar menggenggam dunia, badai kecil kerap kali datang menguji tanpa aba-aba.<br><br>Hingga semesta mempertemukan kita di tahun 2015 silam—di mana matamu masih memantulkan binar lugu, sebelum hari esok menuntutmu menjelma menjadi perempuan yang jauh lebih tegar dari yang kau bayangkan.</p>
+            <button class="btn" onclick="nextSlide(2, 3)">Lanjut</button>
+        </div>
+
+        <!-- SLIDE 3: Fase Peralihan (Struggle) -->
+        <div id="slide3" class="slide">
+            <div class="photo-frame">
+                <img src="foto-peralihan.jpg" alt="Okta Peralihan" onerror="this.src='https://placehold.co/220x220/222/d4af37?text=Perjalanan'">
+            </div>
+            <p>Hari-hari berikutnya adalah ujian tentang bagaimana cara bertahan. Lorong-lorong waktu mengharuskanmu menelan letih sendirian, merajut kembali asa di atas kepingan lelah yang tak setiap orang sempat melihatnya.<br><br>Kau belajar berdiri di atas karang yang terjal, mengeja sunyi di tengah bisingnya tuntutan hidup, dan merawat sisa-sisa percaya diri di saat semesta terasa begitu berat memihak.</p>
+            <button class="btn" onclick="nextSlide(3, 4)">Lanjut</button>
+        </div>
+
+        <!-- SLIDE 4: Fase Dewasa (Independen & 2026) -->
+        <div id="slide4" class="slide">
+            <div class="photo-frame">
+                <img src="foto-dewasa.jpg" alt="Okta Dewasa" onerror="this.src='https://placehold.co/220x220/222/d4af37?text=Okta+Hari+Ini'">
+            </div>
+            <h1>Oktober 2026.</h1>
+            <p>Kini, di usiamu yang ke-28, kau berdiri anggun dalam balutan kemandirian yang utuh. Menolak tunduk pada arah angin, merajut mimpi dengan keringat sendiri di tanah perantauan.<br><br>Melihat caramu menata hidup hari ini, ketahuilah... ada rasa bangga yang amat dalam melihat perempuan hebat yang kini tengah bernapas di hadapanku.</p>
+            <button class="btn" onclick="nextSlide(4, 5)">Halaman Terakhir</button>
+        </div>
+
+        <!-- SLIDE 5: Epilog (Secure Alpha - Respectful & Accountable) -->
+        <div id="slide5" class="slide">
+            <p>Dalam bentang perjalanan yang panjang, gesekan dan salah paham adalah niscaya. Termasuk kelalaian caraku bertutur kata beberapa waktu lalu yang meninggalkan ruang tak nyaman bagimu.</p>
+            <p>Aku mengambil tanggung jawab penuh atas ego yang sempat luput itu, tanpa tapi dan tanpa alasan. Sebuah evaluasi tulus untuk merawat apa yang kita miliki agar senantiasa berpijak di atas fondasi yang sehat.</p>
+            <p>Aku sangat menghormati ruang mandiri dan prinsip hidup yang kau bangun dengan susah payah. Bukan untuk membebanimu, tapi aku ingin membersamai langkahmu sebagai kawan seperjalanan yang tulus.</p>
+            <h1>Selamat ulang tahun, Okta. Bahagia dan sehat selalu di sana.</h1>
+            <p style="font-size: 0.9rem; margin-top: 30px; color: #777;">— Riswan —</p>
+            
+            <button class="btn" style="margin-top: 20px; font-size: 0.9rem; padding: 8px 20px;" onclick="resetJourney()">Kembali ke Awal</button>
+        </div>
+
+    </div>
+
+    <script>
+        function createFireflies() {
+            const container = document.createElement('div');
+            container.className = 'fireflies-container';
+            document.body.appendChild(container);
+
+            const numFireflies = 40; 
+            for (let i = 0; i < numFireflies; i++) {
+                const firefly = document.createElement('div');
+                firefly.className = 'firefly';
+                
+                firefly.style.left = Math.random() * 100 + 'vw';
+                firefly.style.top = Math.random() * 100 + 'vh';
+                
+                firefly.style.animationDuration = (Math.random() * 7 + 5) + 's';
+                firefly.style.animationDelay = (Math.random() * 5) + 's';
+                
+                firefly.style.setProperty('--tx', (Math.random() * 150 - 75) + 'px');
+                firefly.style.setProperty('--ty', (Math.random() * -200 - 50) + 'px');
+
+                container.appendChild(firefly);
+            }
+        }
+        
+        createFireflies();
+
+        function startJourney() {
+            const music = document.getElementById('bg-music');
+            music.volume = 0.3; 
+            music.play().catch(e => console.log("Audio siap saat ada interaksi."));
+            
+            nextSlide(1, 2);
+        }
+
+        function nextSlide(current, next) {
+            document.getElementById('slide' + current).style.opacity = 0;
+            
+            setTimeout(() => {
+                document.getElementById('slide' + current).classList.remove('active');
+                document.getElementById('slide' + next).classList.add('active');
+                
+                document.getElementById('slide' + next).scrollTo({ top: 0, behavior: 'smooth' });
+
+                setTimeout(() => {
+                    document.getElementById('slide' + next).style.opacity = 1;
+                }, 50);
+            }, 1000);
+        }
+
+        function resetJourney() {
+            document.getElementById('slide5').style.opacity = 0;
+            setTimeout(() => {
+                document.getElementById('slide5').classList.remove('active');
+                document.getElementById('slide1').classList.add('active');
+                
+                document.getElementById('slide1').scrollTo({ top: 0, behavior: 'smooth' });
+
+                setTimeout(() => {
+                    document.getElementById('slide1').style.opacity = 1;
+                }, 50);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
